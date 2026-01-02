@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import CurrentYear from '../components/CurrentYear';
 
 export default function TermsPage() {
     const router = useRouter();
@@ -45,7 +46,7 @@ export default function TermsPage() {
                         <h1 className="text-3xl md:text-4xl font-black text-white mb-2 uppercase tracking-tight">
                             Terms & <span className="text-yellow-500">Conditions</span>
                         </h1>
-                        <p className="text-gray-500 font-mono text-xs mb-8">LAST UPDATED: JANUARY 2026</p>
+                        <p className="text-gray-500 font-mono text-xs mb-8">LAST UPDATED: JANUARY <CurrentYear /></p>
 
                         <div className="space-y-8 text-gray-300 text-sm leading-relaxed normal-case">
                             {/* Section 1 */}

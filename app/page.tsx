@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import PaymentModal from './components/PaymentModal';
+import CurrentYear from './components/CurrentYear';
 
 const LOGO_URL = "https://ik.imagekit.io/humbling/6a8072f2-bf06-4bf0-b2cd-ff2c971a6881.png";
 
@@ -225,7 +226,7 @@ export default function Home() {
         <div className="container-main">
           <h3 className="text-[var(--jap-white)] font-bold tracking-[0.3em] text-xs mb-4">HANNAH&apos;S LEGACY HOME</h3>
           <p className="text-gray-600 text-[10px] font-mono">
-            © 2026 COPYRIGHT // SECURE SYSTEM<br />
+            © <CurrentYear /> COPYRIGHT // SECURE SYSTEM<br />
             DESIGNED IN TOKYO STYLE
           </p>
         </div>
