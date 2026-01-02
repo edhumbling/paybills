@@ -1,6 +1,14 @@
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function TermsPage() {
+    const router = useRouter();
+
+    const handleBack = (e: React.MouseEvent) => {
+        e.preventDefault();
+        router.back();
+    };
+
     return (
         <div className="min-h-screen bg-black text-white">
             {/* Header */}
@@ -8,6 +16,7 @@ export default function TermsPage() {
                 <div className="max-w-4xl mx-auto px-6 py-4 flex items-center gap-4">
                     <Link
                         href="/"
+                        onClick={handleBack}
                         className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors group"
                     >
                         <svg

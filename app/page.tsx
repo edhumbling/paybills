@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import PaymentModal from './components/PaymentModal';
@@ -8,23 +8,8 @@ import PaymentModal from './components/PaymentModal';
 const LOGO_URL = "https://ik.imagekit.io/humbling/6a8072f2-bf06-4bf0-b2cd-ff2c971a6881.png";
 
 export default function Home() {
-  const [embers, setEmbers] = useState<{ id: number, delay: number, left: number }[]>([]);
-  const [sessionId, setSessionId] = useState<string>("");
   const [paymentType, setPaymentType] = useState<'electricity' | 'water' | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      const newEmbers = Array.from({ length: 50 }).map((_, i) => ({
-        id: i,
-        delay: Math.random() * 5,
-        left: Math.random() * 100
-      }));
-      setEmbers(newEmbers);
-      setSessionId(Math.random().toString(36).substr(2, 9).toUpperCase());
-    }, 0);
-    return () => clearTimeout(timer);
-  }, []);
 
   const handleMenuPayment = (type: 'electricity' | 'water') => {
     setMenuOpen(false);
@@ -32,300 +17,225 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col font-sans uppercase tracking-wider relative overflow-hidden bg-black text-white selection:bg-yellow-600 selection:text-black">
-      {/* Dynamic Background */}
-      <div className="fire-bg"></div>
-      {embers.map((ember) => (
-        <div
-          key={ember.id}
-          className="ember"
-          style={{
-            animationDelay: `${ember.delay}s`,
-            left: `${ember.left}%`
-          }}
-        />
-      ))}
-
-      {/* Header */}
-      <header className="military-header fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-md">
-        <div className="container-main py-4">
-          <div className="flex items-center justify-between px-4 sm:px-0">
-            <div className="flex items-center gap-4 group cursor-pointer">
-              <div className="w-12 h-12 md:w-14 md:h-14 relative bg-black border border-yellow-600 rounded-sm overflow-hidden shadow-[0_0_15px_rgba(255,215,0,0.3)] group-hover:shadow-[0_0_25px_rgba(255,215,0,0.6)] transition-all duration-500">
-                <Image
-                  src={LOGO_URL}
-                  alt="Hannah's Legacy Home Logo"
-                  width={56}
-                  height={56}
-                  className="w-full h-full object-cover opacity-90 hover:opacity-100"
-                />
-              </div>
-              <div>
-                <h1 className="text-lg md:text-xl font-extrabold text-white tracking-widest leading-none">
-                  Hannah&apos;s <span className="text-[#FFD700]">Legacy</span>
-                </h1>
-                <p className="text-[10px] text-gray-500 font-mono mt-1">SECURE MEMBER PORTAL</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4">
-              <div className="hidden md:flex items-center gap-2">
-                <div className="px-3 py-1 border border-red-900/50 bg-red-950/20 text-red-500 text-xs font-mono animate-pulse">
-                  LIVE
-                </div>
-              </div>
-
-              {/* Hamburger Menu Button */}
-              <button
-                onClick={() => setMenuOpen(!menuOpen)}
-                className="relative w-10 h-10 flex flex-col items-center justify-center gap-1.5 hover:bg-white/5 rounded transition-colors"
-                aria-label="Menu"
-              >
-                <span className={`w-6 h-0.5 bg-yellow-500 transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
-                <span className={`w-6 h-0.5 bg-yellow-500 transition-all duration-300 ${menuOpen ? 'opacity-0' : ''}`}></span>
-                <span className={`w-6 h-0.5 bg-yellow-500 transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen font-sans bg-japanese-grid text-white overflow-x-hidden selection:bg-[var(--jap-red)] selection:text-white relative">
 
       {/* Menu Overlay */}
       {menuOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/80 backdrop-blur-sm"
+          className="fixed inset-0 z-[60] bg-black/90 backdrop-blur-md animate-in fade-in duration-300"
           onClick={() => setMenuOpen(false)}
         />
       )}
 
-      {/* Menu Drawer */}
-      <div className={`fixed top-0 right-0 h-full w-72 bg-black border-l border-yellow-600/30 z-50 transform transition-transform duration-300 ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        <div className="pt-20 px-6">
-          <p className="text-xs text-gray-600 font-mono mb-6 tracking-widest">NAVIGATION</p>
+      {/* Sharp Sidebar Menu */}
+      <div className={`fixed top-0 right-0 h-full w-[350px] bg-[var(--jap-black)] border-l border-[var(--jap-red)] z-[70] transform transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div className="flex flex-col h-full font-bold uppercase tracking-widest relative">
+          <button
+            onClick={() => setMenuOpen(false)}
+            className="absolute top-6 right-6 text-gray-500 hover:text-[var(--jap-red)] transition-colors p-2"
+          >
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          </button>
 
-          <nav className="space-y-2">
+          <div className="p-12 mt-12 space-y-8">
+            <div className="text-[var(--jap-red)] text-xs mb-8 font-mono">SYSTEM NAVIGATION // メニュー</div>
+
             <button
               onClick={() => handleMenuPayment('electricity')}
-              className="w-full text-left px-4 py-4 border border-yellow-600/30 bg-yellow-900/10 hover:bg-yellow-600 hover:text-black text-yellow-500 font-bold tracking-wide transition-all flex items-center gap-3"
+              className="w-full text-left group flex items-center justify-between border-b border-gray-800 pb-4 hover:border-[var(--jap-yellow)] transition-colors"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-              </svg>
-              Pay Light Bill
+              <span className="text-2xl group-hover:text-[var(--jap-yellow)] transition-colors">Electricity</span>
+              <span className="text-xs text-gray-600 group-hover:text-[var(--jap-yellow)] writing-vertical h-8">電気</span>
             </button>
 
             <button
               onClick={() => handleMenuPayment('water')}
-              className="w-full text-left px-4 py-4 border border-cyan-500/30 bg-cyan-900/10 hover:bg-cyan-500 hover:text-black text-cyan-400 font-bold tracking-wide transition-all flex items-center gap-3"
+              className="w-full text-left group flex items-center justify-between border-b border-gray-800 pb-4 hover:border-[var(--jap-blue)] transition-colors"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2.34"></path>
-              </svg>
-              Pay Water Bill
+              <span className="text-2xl group-hover:text-[var(--jap-blue)] transition-colors">Water</span>
+              <span className="text-xs text-gray-600 group-hover:text-[var(--jap-blue)] writing-vertical h-8">水道</span>
             </button>
 
-            <div className="pt-4 border-t border-gray-800 mt-4">
-              <Link
-                href="/terms"
-                onClick={() => setMenuOpen(false)}
-                className="w-full text-left px-4 py-4 border border-gray-700 bg-gray-900/50 hover:bg-gray-800 text-gray-400 hover:text-white font-mono text-sm tracking-wide transition-all flex items-center gap-3"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                </svg>
-                Terms & Conditions
-              </Link>
-            </div>
-          </nav>
+            <Link
+              href="/terms"
+              onClick={() => setMenuOpen(false)}
+              className="w-full text-left group flex items-center justify-between border-b border-gray-800 pb-4 hover:border-white transition-colors"
+            >
+              <span className="text-xl text-gray-400 group-hover:text-white transition-colors">Terms & Conditions</span>
+              <span className="text-xs text-gray-600 group-hover:text-white writing-vertical h-8">規約</span>
+            </Link>
+          </div>
+
+          <div className="mt-auto p-12 bg-gray-900/20">
+            <p className="text-[10px] text-gray-500 font-mono">HANNAH&apos;S LEGACY HOME<br />SECURE PORTAL v2.0</p>
+          </div>
         </div>
       </div>
 
-      {/* Hero Section */}
-      <section className="pt-32 md:pt-40 pb-12 md:pb-20 px-6 relative z-10">
-        <div className="container-main">
-          <div className="flex flex-col items-center text-center fade-in">
-            <div className="w-full max-w-4xl mx-auto border-t border-b border-yellow-600/30 py-12 relative bg-black/40 backdrop-blur-sm">
-              <div className="absolute top-0 left-0 w-2 h-2 bg-yellow-500 box-shadow-glow"></div>
-              <div className="absolute top-0 right-0 w-2 h-2 bg-yellow-500 box-shadow-glow"></div>
-              <div className="absolute bottom-0 left-0 w-2 h-2 bg-yellow-500 box-shadow-glow"></div>
-              <div className="absolute bottom-0 right-0 w-2 h-2 bg-yellow-500 box-shadow-glow"></div>
+      {/* Header */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[var(--jap-black)]/90 backdrop-blur-md border-b border-white/5">
+        <div className="container-main py-4 px-6 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 relative overflow-hidden clip-sharp bg-white/10 group hover:bg-[var(--jap-red)] transition-colors duration-500">
+              <Image src={LOGO_URL} alt="Logo" fill className="object-cover opacity-80 group-hover:opacity-100" />
+            </div>
+            <div>
+              <h1 className="text-sm font-black tracking-[0.2em] leading-none text-white">HANNAH&apos;S LEGACY</h1>
+              <p className="text-[9px] text-[var(--jap-red)] font-mono mt-0.5">EST. 2026 // 東京スタイル</p>
+            </div>
+          </div>
 
-              <p className="text-yellow-500 font-mono text-sm mb-4 tracking-[0.3em]">
-                MISSION: DEBT FREE LIVING
-              </p>
+          <button
+            onClick={() => setMenuOpen(true)}
+            className="flex items-center gap-2 group hover:text-[var(--jap-yellow)] transition-colors"
+          >
+            <span className="text-xs tracking-widest hidden md:block group-hover:translate-x-1 transition-transform">MENU</span>
+            <div className="space-y-1.5 p-2">
+              <div className="w-6 h-0.5 bg-white group-hover:w-8 group-hover:bg-[var(--jap-yellow)] transition-all"></div>
+              <div className="w-4 h-0.5 bg-white ml-auto group-hover:bg-[var(--jap-yellow)] transition-all"></div>
+            </div>
+          </button>
+        </div>
+      </header>
 
-              <h1 className="text-4xl md:text-7xl font-black text-white mb-6 leading-tight drop-shadow-2xl">
-                PAYMENT <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-orange-500 to-red-600 animate-pulse">PORTAL</span>
-              </h1>
+      {/* Hero */}
+      <section className="relative h-[85vh] flex items-center overflow-hidden">
+        <div className="absolute inset-0 z-0 select-none pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-r from-[var(--jap-black)] via-[var(--jap-black)]/80 to-transparent z-10"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[var(--jap-black)] via-transparent to-[var(--jap-black)]/50 z-10"></div>
+          <Image
+            src="/hero-bg.png"
+            alt="Background"
+            fill
+            className="object-cover opacity-70 scale-105 animate-pulse"
+            style={{ animationDuration: '10s' }}
+            priority
+          />
+        </div>
 
-              <p className="text-gray-400 max-w-2xl mx-auto text-base md:text-xl font-light normal-case tracking-normal">
-                Members are required to settle dues between the <span className="text-white font-bold border-b border-yellow-500">30th and 31st</span> of every month.
-                <br /><span className="text-yellow-500/80 mt-2 block">Secure your home. Maintain your access.</span>
-              </p>
+        <div className="container-main relative z-20 px-6 w-full">
+          <div className="max-w-4xl animate-slide-in">
+            <div className="flex items-start gap-4 mb-4">
+              <span className="bg-[var(--jap-red)] text-white text-[10px] font-bold px-2 py-1 clip-sharp">SYSTEM ONLINE</span>
+              <span className="text-[var(--jap-yellow)] text-xs font-mono tracking-widest">PAYMENT GATEWAY_01</span>
             </div>
 
-            <div className="mt-12 flex flex-col md:flex-row gap-6 w-full max-w-lg">
-              <a href="#payment-options" className="btn-military-primary w-full md:w-auto flex-1 hover:no-underline group">
-                <span className="group-hover:text-black">Make a Payment</span>
-                <svg className="w-5 h-5 group-hover:rotate-45 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            <h1 className="text-6xl md:text-9xl font-black text-white leading-[0.85] tracking-tighter mb-8 drop-shadow-2xl">
+              BILL<br />
+              PAYMENT<br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--jap-yellow)] to-[var(--jap-red)]">PORTAL</span>
+            </h1>
+
+            <div className="flex items-center gap-8 border-t border-white/10 pt-8 mt-8 max-w-xl">
+              <p className="text-gray-400 text-sm leading-relaxed font-mono">
+                DUE DATE: <span className="text-white">30TH-31ST</span><br />
+                Secure transaction interface initiated. Please select your utility provider to proceed.
+              </p>
+              <a href="#payment-grid" className="hidden md:flex items-center justify-center w-16 h-16 border border-white/20 hover:border-[var(--jap-red)] hover:bg-[var(--jap-red)] transition-all rounded-full group cursor-pointer">
+                <svg className="w-6 h-6 transform group-hover:translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
               </a>
             </div>
           </div>
         </div>
-      </section>
 
-      {/* Critical Info Section */}
-      <section className="py-10 px-6 relative z-10">
-        <div className="container-main">
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="border border-red-600/50 bg-red-950/10 p-8 relative overflow-hidden group hover:bg-red-950/20 transition-colors">
-              <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-              <div className="relative z-10">
-                <h3 className="text-red-500 text-xl md:text-2xl font-bold mb-4 flex items-center gap-3">
-                  <span className="relative flex h-3 w-3">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
-                  </span>
-                  IMPORTANT NOTICE
-                </h3>
-                <p className="text-gray-300 text-sm normal-case leading-relaxed mb-6 font-mono border-l-2 border-red-800 pl-4">
-                  FAILURE TO COMPLETE PAYMENT WITHIN THE DESIGNATED WINDOW WILL RESULT IN <span className="text-white font-bold">IMMEDIATE INTERRUPTION</span> OF UTILITY SERVICES. ACCESS WILL REMAIN RESTRICTED UNTIL FULL RESOLUTION IS CONFIRMED.
-                </p>
-                <div className="bg-red-950/40 p-3 border border-red-900/60 text-xs text-red-300 font-mono text-center warning-glitch">
-                  PLEASE PAY ON TIME // AVOID DEBT ACCUMULATION
-                </div>
-              </div>
-            </div>
-
-            <div className="border border-yellow-600/50 bg-yellow-950/10 p-8 relative overflow-hidden group hover:bg-yellow-950/20 transition-colors">
-              <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-              <div className="relative z-10">
-                <h3 className="text-yellow-500 text-xl md:text-2xl font-bold mb-4 flex items-center gap-2">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                  AUTOMATIC PAYMENTS
-                </h3>
-                <p className="text-gray-300 text-sm normal-case leading-relaxed mb-6 font-sans">
-                  Upon completion of your initial payment, your profile will be securely set up for <span className="text-yellow-400">automated monthly billing</span>.
-                  This ensures consistent service without manual intervention.
-                </p>
-                <ul className="space-y-3 font-mono">
-                  <li className="flex items-center gap-3 text-sm text-yellow-500/80">
-                    <span className="w-1.5 h-1.5 bg-yellow-500 rounded-full"></span>
-                    MONTHLY BILLING SETUP
-                  </li>
-                  <li className="flex items-center gap-3 text-sm text-yellow-500/80">
-                    <span className="w-1.5 h-1.5 bg-yellow-500 rounded-full"></span>
-                    DEBT-FREE LIVING INITIATIVE
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+        {/* Japanese vertically decorative text */}
+        <div className="absolute top-1/2 right-8 transform -translate-y-1/2 hidden md:block opacity-20 text-white font-black text-9xl writing-vertical select-none pointer-events-none">
+          支払い
         </div>
       </section>
 
-      {/* Payment Options */}
-      <section id="payment-options" className="py-20 px-6 relative z-10">
-        <div className="container-main">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-12 border-b border-gray-800 pb-4 gap-4">
-            <h2 className="text-3xl font-bold text-white flex items-center gap-3">
-              <span className="text-yellow-600">{'//'}</span> SELECT BILL TYPE
-            </h2>
-            <span className="text-gray-600 font-mono text-xs md:text-sm bg-gray-900 px-3 py-1 rounded border border-gray-800">
-              SECURE PAYMENT PROCESSING
-            </span>
-          </div>
+      {/* Payment Grid */}
+      <section id="payment-grid" className="py-24 px-6 relative bg-[var(--jap-black)]">
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-px h-24 bg-gradient-to-b from-[var(--jap-red)] to-transparent"></div>
 
-          <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
-            {/* Electricity Card */}
+        <div className="container-main max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-16">
+
+            {/* Electricity Card (Red Theme) */}
             <div
               onClick={() => setPaymentType('electricity')}
-              className="group cursor-pointer"
+              className="group relative h-[500px] cursor-pointer clip-diagonal bg-neutral-900 border border-white/5 hover:border-[var(--jap-red)] transition-all duration-500 hover:-translate-y-2"
             >
-              <div className="military-card h-full p-8 flex flex-col items-center text-center relative overflow-hidden min-h-[400px]">
-                <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity">
-                  <Image src="https://ik.imagekit.io/humbling/ecg.png" alt="" fill className="object-cover" />
+              {/* Image BG */}
+              <div className="absolute inset-0 opacity-40 group-hover:opacity-60 transition-opacity duration-500">
+                <Image src="https://ik.imagekit.io/humbling/ecg.png" alt="ECG" fill className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--jap-blue)]/90 via-[var(--jap-black)]/80 to-[var(--jap-black)]/40 mix-blend-multiply"></div>
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[var(--jap-black)]"></div>
+
+              {/* Content */}
+              <div className="relative z-10 h-full p-10 flex flex-col justify-between">
+                <div className="flex justify-between items-start">
+                  <h2 className="text-4xl font-black text-white italic tracking-tighter">ELECTRICITY</h2>
+                  <span className="text-[var(--jap-red)] font-bold text-lg writing-vertical">電気代</span>
                 </div>
 
-                <div className="w-24 h-24 mb-8 bg-black border-2 border-yellow-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-[0_0_20px_rgba(255,165,0,0.4)] relative z-10">
-                  <div className="absolute inset-0 rounded-full border border-yellow-500/30 animate-ping"></div>
-                  <svg className="w-10 h-10 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                </div>
-
-                <h3 className="text-3xl font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors tracking-tighter">ELECTRICITY</h3>
-                <div className="h-0.5 w-16 bg-yellow-600 mb-6"></div>
-
-                <p className="text-gray-400 text-sm mb-10 font-mono leading-relaxed">
-                  UTILITY: ELECTRICITY BILL<br />
-                  STATUS: <span className="text-green-500">AVAILABLE</span>
-                </p>
-
-                <div className="mt-auto w-full border border-yellow-600/30 py-4 text-yellow-500 font-bold tracking-[0.2em] bg-yellow-900/10 group-hover:bg-yellow-600 group-hover:text-black transition-all clip-path-button">
-                  PAY NOW
+                <div>
+                  <div className="w-12 h-1 bg-[var(--jap-red)] mb-6 group-hover:w-24 transition-all duration-300"></div>
+                  <p className="text-gray-300 font-mono text-sm mb-8">
+                    POWER CONSUMPTION CHARGE.<br />
+                    STATUS: <span className="text-[var(--jap-red)] glitch">ACTIVE</span>
+                  </p>
+                  <button className="w-full py-4 bg-[var(--jap-red)] text-white font-bold tracking-[0.2em] hover:bg-white hover:text-black transition-colors clip-button">
+                    PAY NOW
+                  </button>
                 </div>
               </div>
             </div>
 
-            {/* Water Card */}
+            {/* Water Card (Blue Theme) */}
             <div
               onClick={() => setPaymentType('water')}
-              className="group cursor-pointer"
+              className="group relative h-[500px] cursor-pointer clip-diagonal bg-neutral-900 border border-white/5 hover:border-[var(--jap-blue)] transition-all duration-500 hover:-translate-y-2"
             >
-              <div className="military-card h-full p-8 flex flex-col items-center text-center relative overflow-hidden min-h-[400px]" style={{ borderColor: 'rgba(79, 209, 199, 0.3)' }}>
-                <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity">
-                  <Image src="https://ik.imagekit.io/humbling/gwcl.png" alt="" fill className="object-cover" />
+              {/* Image BG */}
+              <div className="absolute inset-0 opacity-40 group-hover:opacity-60 transition-opacity duration-500">
+                <Image src="https://ik.imagekit.io/humbling/gwcl.png" alt="GWCL" fill className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--jap-blue)]/90 via-[var(--jap-black)]/80 to-[var(--jap-black)]/40 mix-blend-multiply"></div>
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[var(--jap-black)]"></div>
+
+              {/* Content */}
+              <div className="relative z-10 h-full p-10 flex flex-col justify-between">
+                <div className="flex justify-between items-start">
+                  <h2 className="text-4xl font-black text-white italic tracking-tighter">WATER</h2>
+                  <span className="text-[var(--jap-blue)] font-bold text-lg writing-vertical">水道代</span>
                 </div>
 
-                <div className="w-24 h-24 mb-8 bg-black border-2 border-cyan-500/50 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-[0_0_20px_rgba(6,182,212,0.4)] relative z-10">
-                  <div className="absolute inset-0 rounded-full border border-cyan-400/30 animate-ping" style={{ animationDuration: '2s' }}></div>
-                  <svg className="w-10 h-10 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2.34l5.66-3.66"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 2.69L17.66 8.35A8 8 0 1 1 6.34 8.35"></path></svg>
-                </div>
-
-                <h3 className="text-3xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors tracking-tighter">WATER (GWCL)</h3>
-                <div className="h-0.5 w-16 bg-cyan-600 mb-6"></div>
-
-                <p className="text-gray-400 text-sm mb-10 font-mono leading-relaxed">
-                  UTILITY: WATER BILL<br />
-                  STATUS: <span className="text-green-500">AVAILABLE</span>
-                </p>
-
-                <div className="mt-auto w-full border border-cyan-600/30 py-4 text-cyan-400 font-bold tracking-[0.2em] bg-cyan-900/10 group-hover:bg-cyan-500 group-hover:text-black transition-all clip-path-button">
-                  PAY NOW
+                <div>
+                  <div className="w-12 h-1 bg-[var(--jap-blue)] mb-6 group-hover:w-24 transition-all duration-300"></div>
+                  <p className="text-gray-300 font-mono text-sm mb-8">
+                    WATER UTILITY CHARGE.<br />
+                    STATUS: <span className="text-[var(--jap-blue)] glitch">ACTIVE</span>
+                  </p>
+                  <button className="w-full py-4 bg-[var(--jap-blue)] text-white font-bold tracking-[0.2em] hover:bg-white hover:text-black transition-colors clip-button">
+                    PAY NOW
+                  </button>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </section>
 
+      {/* Footer */}
+      <footer className="py-12 border-t border-white/5 bg-[var(--jap-black)] text-center relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[var(--jap-red)] via-[var(--jap-yellow)] to-[var(--jap-blue)] opacity-50"></div>
+        <div className="container-main">
+          <h3 className="text-[var(--jap-white)] font-bold tracking-[0.3em] text-xs mb-4">HANNAH&apos;S LEGACY HOME</h3>
+          <p className="text-gray-600 text-[10px] font-mono">
+            © 2026 COPYRIGHT // SECURE SYSTEM<br />
+            DESIGNED IN TOKYO STYLE
+          </p>
+        </div>
+      </footer>
+
+      {/* Interactions */}
       <PaymentModal
         paymentType={paymentType}
         onClose={() => setPaymentType(null)}
       />
-
-      {/* Footer */}
-      <footer className="py-12 px-6 border-t border-yellow-900/20 bg-black relative z-10">
-        <div className="container-main text-center">
-          <div className="mb-8 flex justify-center">
-            <div className="w-10 h-10 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-              <Image
-                src={LOGO_URL}
-                alt="Logo"
-                width={40}
-                height={40}
-                className="object-cover"
-              />
-            </div>
-          </div>
-          <p className="text-gray-600 text-[10px] md:text-xs font-mono tracking-widest">
-            © {new Date().getFullYear()} HANNAH&apos;S LEGACY HOME. ALL RIGHTS RESERVED.<br />
-            SECURE SESSION ID: {sessionId}
-          </p>
-          <Link href="/terms" className="text-gray-500 hover:text-yellow-500 text-xs font-mono mt-4 block transition-colors">
-            Terms & Conditions
-          </Link>
-        </div>
-      </footer>
     </div>
   );
 }
