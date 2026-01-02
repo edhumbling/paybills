@@ -1,0 +1,223 @@
+@import "tailwindcss";
+
+:root {
+  --background: #050505;
+  --foreground: #ffffff;
+  --military-dark: #0a0a0a;
+  --gold-primary: #ffd700;
+  --gold-glow: rgba(255, 215, 0, 0.6);
+  --fire-red: #ff4500;
+  --fire-orange: #ff8c00;
+  --danger-red: #dc2626;
+  --glass-bg: rgba(10, 10, 10, 0.85);
+  --glass-border: rgba(255, 215, 0, 0.3);
+  --sharp-angle: polygon(0 0, 100% 0, 100% 85%, 95% 100%, 0 100%);
+  --sharp-angle-inv: polygon(0 0, 100% 0, 100% 100%, 5% 100%, 0 85%);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: var(--background);
+}
+
+body {
+  background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Fire/Gold Background Animation */
+.fire-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.4;
+  background:
+    Repeating-linear-gradient(90deg, transparent 0, transparent 50px, rgba(255, 215, 0, 0.05) 50px, rgba(255, 215, 0, 0.05) 51px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(20, 0, 0, 0.6));
+  pointer-events: none;
+}
+
+.ember {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--gold-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--fire-orange), 0 0 20px var(--fire-red);
+  animation: rise 5s infinite linear;
+  opacity: 0;
+}
+
+@keyframes rise {
+  0% {
+    transform: translateY(100vh) scale(0);
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-10vh) scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Sharp Military Card */
+.military-card {
+  background: linear-gradient(135deg, rgba(20, 20, 20, 0.95), rgba(10, 10, 10, 0.98));
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  clip-path: var(--sharp-angle);
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.military-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--gold-primary), var(--fire-orange));
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.military-card:hover {
+  transform: scale(1.02);
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 30px rgba(255, 69, 0, 0.2);
+}
+
+.military-card:hover::before {
+  opacity: 1;
+  box-shadow: 0 0 15px var(--gold-primary);
+}
+
+/* Glowing Gold Text */
+.gold-text-glow {
+  color: var(--gold-primary);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5), 0 0 20px rgba(255, 69, 0, 0.3);
+}
+
+/* Buttons */
+.btn-military-primary {
+  background: linear-gradient(90deg, #b8860b, #daa520);
+  color: #000;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 16px 32px;
+  border: none;
+  clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.btn-military-primary:hover {
+  background: linear-gradient(90deg, #FFD700, #FFA500);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+  transform: translateY(-2px);
+}
+
+.btn-military-danger {
+  background: rgba(20, 0, 0, 0.8);
+  border: 1px solid var(--danger-red);
+  color: var(--danger-red);
+  font-family: monospace;
+  text-transform: uppercase;
+  padding: 12px 24px;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 10% 100%, 0 90%);
+  transition: all 0.3s ease;
+}
+
+.btn-military-danger:hover {
+  background: var(--danger-red);
+  color: black;
+  box-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
+}
+
+/* Warnings */
+.warning-box {
+  border-left: 4px solid var(--danger-red);
+  background: linear-gradient(90deg, rgba(220, 38, 38, 0.1), transparent);
+  padding: 16px;
+  position: relative;
+}
+
+.warning-glitch {
+  animation: glitch-anim 3s infinite;
+}
+
+@keyframes glitch-anim {
+  0% {
+    transform: translate(0);
+  }
+
+  2% {
+    transform: translate(-2px, 1px);
+  }
+
+  4% {
+    transform: translate(2px, -1px);
+  }
+
+  6% {
+    transform: translate(0);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
+
+/* Header */
+.military-header {
+  background: rgba(5, 5, 5, 0.95);
+  border-bottom: 2px solid rgba(255, 215, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+/* Typography Overrides */
+h1,
+h2,
+h3 {
+  font-family: 'Arial Black', sans-serif;
+  /* Fallback for aggressive look */
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gold-primary);
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
