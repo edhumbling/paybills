@@ -28,120 +28,142 @@ export default function Home() {
         />
       )}
 
-      {/* Tactical Sidebar Menu */}
-      <div className={`fixed top-0 right-0 h-full w-full md:w-[380px] bg-black/95 backdrop-blur-md border-l-2 border-[var(--jap-red)] z-[70] transform transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        <div className="flex flex-col h-full relative font-mono">
-          
+      {/* Tactical Sidebar Menu - Militant High Edge Mobile */}
+      <div className={`fixed top-0 right-0 h-full w-full md:w-[380px] bg-black/98 backdrop-blur-xl border-l-4 border-l-[var(--jap-red)] z-[70] transform transition-transform duration-300 ease-out ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div className="flex flex-col h-full relative font-mono select-none">
+
           {/* Tactical Overlay Patterns */}
-          <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[var(--jap-red)] to-transparent animate-pulse"></div>
+          <div className="absolute inset-0 opacity-[0.05] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')]"></div>
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[var(--jap-red)] to-transparent animate-pulse z-10"></div>
+
+          {/* Mobile Specific Corner Brackets */}
+          <div className="absolute top-4 left-4 w-4 h-4 border-t-2 border-l-2 border-[var(--jap-red)] z-20"></div>
+          <div className="absolute bottom-4 left-4 w-4 h-4 border-b-2 border-l-2 border-[var(--jap-red)] z-20"></div>
 
           {/* Close Button - Tactical Style */}
           <button
             onClick={() => setMenuOpen(false)}
-            className="absolute top-6 right-6 z-50 w-12 h-12 flex items-center justify-center border-2 border-zinc-800 text-zinc-500 hover:text-[var(--jap-red)] hover:border-[var(--jap-red)] transition-all duration-200 group"
+            className="absolute top-6 right-6 z-50 w-12 h-12 flex items-center justify-center bg-zinc-900 border-2 border-[var(--jap-red)] text-white hover:bg-[var(--jap-red)] hover:text-black transition-all duration-100 group clip-sharp shadow-[0_0_10px_rgba(215,0,15,0.3)]"
           >
             <div className="relative w-6 h-6">
-              <span className="absolute top-1/2 left-0 w-full h-0.5 bg-currentColor rotate-45 group-hover:scale-110"></span>
-              <span className="absolute top-1/2 left-0 w-full h-0.5 bg-currentColor -rotate-45 group-hover:scale-110"></span>
+              <span className="absolute top-1/2 left-0 w-full h-0.5 bg-currentColor rotate-45 group-hover:rotate-0 transition-transform"></span>
+              <span className="absolute top-1/2 left-0 w-full h-0.5 bg-currentColor -rotate-45 group-hover:rotate-0 transition-transform"></span>
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 flex items-center justify-center font-black text-[10px]">
+                X
+              </div>
             </div>
           </button>
 
-          <div className="flex-1 px-6 py-24 flex flex-col justify-start">
-            <div className="mb-12">
+          <div className="flex-1 px-8 py-24 flex flex-col justify-start relative z-30">
+            <div className="mb-12 border-l-2 border-zinc-800 pl-4 py-2">
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-2 h-2 bg-[var(--jap-red)] animate-ping"></div>
-                <span className="text-[var(--jap-red)] text-xs font-black tracking-[0.4em] uppercase">
-                  System Navigation
+                <div className="w-3 h-3 bg-[var(--jap-red)] shadow-[0_0_8px_var(--jap-red)] animate-pulse"></div>
+                <span className="text-white text-sm font-black tracking-[0.3em] uppercase glitch" data-text="SYSTEM NAV">
+                  SYSTEM NAV
                 </span>
               </div>
-              <div className="h-0.5 w-full bg-zinc-900 flex">
-                <div className="h-full w-1/3 bg-[var(--jap-red)]"></div>
+              <div className="h-px w-full bg-zinc-800 flex mt-4 mb-2">
+                <div className="h-full w-24 bg-[var(--jap-red)]"></div>
               </div>
-              <div className="flex justify-between mt-1">
-                <span className="text-[10px] text-zinc-600">ID: SECURE_CORE_v2</span>
-                <span className="text-[10px] text-zinc-600">AUTH: ADMIN</span>
+              <div className="flex flex-col gap-1">
+                <span className="text-[10px] text-zinc-500 font-bold tracking-widest">ID: SECURE_CORE_v2 // MOBILE_OP</span>
+                <span className="text-[10px] text-zinc-500 font-bold tracking-widest">AUTH: ADMIN_ACCESS_GRANTED</span>
               </div>
             </div>
 
-            <nav className="space-y-4">
-              {/* Electricity - Tactical Card */}
+            <nav className="space-y-6">
+              {/* Electricity - Militant Card */}
               <button
                 onClick={() => handleMenuPayment('electricity')}
-                className="w-full group relative p-5 bg-zinc-900/50 border border-zinc-800 hover:border-[var(--jap-yellow)] transition-all duration-200 text-left overflow-hidden"
+                className="w-full group relative p-6 bg-zinc-900 border-2 border-zinc-800 hover:border-[var(--jap-yellow)] hover:bg-zinc-800 transition-all duration-100 text-left overflow-hidden clip-sharp"
               >
-                <div className="absolute top-0 left-0 w-1 h-full bg-[var(--jap-yellow)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <div className="flex items-center justify-between">
+                <div className="absolute top-0 right-0 w-16 h-1 bg-[var(--jap-yellow)] group-hover:w-full transition-all duration-300 ease-out"></div>
+                <div className="absolute bottom-0 left-0 w-8 h-1 bg-[var(--jap-yellow)] group-hover:w-full transition-all duration-500 ease-out delay-75"></div>
+
+                <div className="flex items-center justify-between relative z-10">
                   <div>
-                    <div className="text-[10px] text-zinc-500 mb-1 group-hover:text-[var(--jap-yellow)] transition-colors tracking-widest uppercase font-bold">Utility // 01</div>
-                    <span className="block text-2xl font-black text-white tracking-tighter group-hover:translate-x-1 transition-transform italic">ELECTRICITY</span>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="px-1.5 py-0.5 bg-[var(--jap-yellow)] text-black text-[9px] font-black tracking-widest">01</span>
+                      <span className="text-[10px] text-zinc-500 group-hover:text-white transition-colors tracking-widest uppercase font-bold">UTILITY_OP</span>
+                    </div>
+                    <span className="block text-3xl font-black text-white tracking-tighter group-hover:text-[var(--jap-yellow)] transition-colors italic">ELECTRICITY</span>
                   </div>
                   <div className="text-right">
-                    <span className="block text-xs font-bold text-zinc-600 mb-1">電気</span>
-                    <span className="text-[10px] text-[var(--jap-yellow)] animate-pulse">● ACTIVE</span>
+                    <span className="block text-xl font-bold text-zinc-700 group-hover:text-white transition-colors mb-1">電気</span>
+                    <span className="inline-block px-1 py-0.5 bg-zinc-800 text-[9px] text-[var(--jap-yellow)] font-bold border border-[var(--jap-yellow)]">ACTIVE</span>
                   </div>
                 </div>
-                {/* Corner Accents */}
-                <div className="absolute top-0 right-0 w-2 h-2 border-t border-right border-zinc-700"></div>
-                <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-left border-zinc-700"></div>
               </button>
 
-              {/* Water - Tactical Card */}
+              {/* Water - Militant Card */}
               <button
                 onClick={() => handleMenuPayment('water')}
-                className="w-full group relative p-5 bg-zinc-900/50 border border-zinc-800 hover:border-[var(--jap-blue)] transition-all duration-200 text-left overflow-hidden"
+                className="w-full group relative p-6 bg-zinc-900 border-2 border-zinc-800 hover:border-[var(--jap-blue)] hover:bg-zinc-800 transition-all duration-100 text-left overflow-hidden clip-sharp"
               >
-                <div className="absolute top-0 left-0 w-1 h-full bg-[var(--jap-blue)] opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <div className="flex items-center justify-between">
+                <div className="absolute top-0 right-0 w-16 h-1 bg-[var(--jap-blue)] group-hover:w-full transition-all duration-300 ease-out"></div>
+                <div className="absolute bottom-0 left-0 w-8 h-1 bg-[var(--jap-blue)] group-hover:w-full transition-all duration-500 ease-out delay-75"></div>
+
+                <div className="flex items-center justify-between relative z-10">
                   <div>
-                    <div className="text-[10px] text-zinc-500 mb-1 group-hover:text-[var(--jap-blue)] transition-colors tracking-widest uppercase font-bold">Utility // 02</div>
-                    <span className="block text-2xl font-black text-white tracking-tighter group-hover:translate-x-1 transition-transform italic">WATER</span>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="px-1.5 py-0.5 bg-[var(--jap-blue)] text-white text-[9px] font-black tracking-widest">02</span>
+                      <span className="text-[10px] text-zinc-500 group-hover:text-white transition-colors tracking-widest uppercase font-bold">UTILITY_OP</span>
+                    </div>
+                    <span className="block text-3xl font-black text-white tracking-tighter group-hover:text-[var(--jap-blue)] transition-colors italic">WATER</span>
                   </div>
                   <div className="text-right">
-                    <span className="block text-xs font-bold text-zinc-600 mb-1">水道</span>
-                    <span className="text-[10px] text-[var(--jap-blue)] animate-pulse">● ACTIVE</span>
+                    <span className="block text-xl font-bold text-zinc-700 group-hover:text-white transition-colors mb-1">水道</span>
+                    <span className="inline-block px-1 py-0.5 bg-zinc-800 text-[9px] text-[var(--jap-blue)] font-bold border border-[var(--jap-blue)]">ACTIVE</span>
                   </div>
                 </div>
-                <div className="absolute top-0 right-0 w-2 h-2 border-t border-right border-zinc-700"></div>
-                <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-left border-zinc-700"></div>
               </button>
 
-              {/* Terms - Tactical Card */}
+              {/* Terms - Militant Card */}
               <Link
                 href="/terms"
                 onClick={() => setMenuOpen(false)}
-                className="w-full group relative p-5 bg-zinc-900/50 border border-zinc-800 hover:border-white transition-all duration-200 text-left block overflow-hidden"
+                className="w-full group relative p-6 bg-zinc-900 border-2 border-zinc-800 hover:border-white hover:bg-zinc-800 transition-all duration-100 text-left block overflow-hidden clip-sharp"
               >
-                <div className="absolute top-0 left-0 w-1 h-full bg-white opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <div className="flex items-center justify-between">
+                <div className="absolute top-0 right-0 w-16 h-1 bg-white group-hover:w-full transition-all duration-300 ease-out"></div>
+                <div className="absolute bottom-0 left-0 w-8 h-1 bg-white group-hover:w-full transition-all duration-500 ease-out delay-75"></div>
+
+                <div className="flex items-center justify-between relative z-10">
                   <div>
-                    <div className="text-[10px] text-zinc-500 mb-1 group-hover:text-white transition-colors tracking-widest uppercase font-bold">Legal // 03</div>
-                    <span className="block text-xl font-black text-zinc-300 group-hover:text-white tracking-tighter group-hover:translate-x-1 transition-transform italic">TERMS</span>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="px-1.5 py-0.5 bg-white text-black text-[9px] font-black tracking-widest">03</span>
+                      <span className="text-[10px] text-zinc-500 group-hover:text-white transition-colors tracking-widest uppercase font-bold">LEGAL_DOC</span>
+                    </div>
+                    <span className="block text-2xl font-black text-zinc-400 group-hover:text-white tracking-tighter transition-colors italic">TERMS</span>
                   </div>
                   <div className="text-right">
-                    <span className="block text-xs font-bold text-zinc-600 mb-1">規約</span>
-                    <span className="text-[10px] text-zinc-400">● READ</span>
+                    <span className="block text-xl font-bold text-zinc-700 group-hover:text-white transition-colors mb-1">規約</span>
+                    <span className="inline-block px-1 py-0.5 bg-zinc-800 text-[9px] text-zinc-400 font-bold border border-zinc-600">READ</span>
                   </div>
                 </div>
-                <div className="absolute top-0 right-0 w-2 h-2 border-t border-right border-zinc-700"></div>
-                <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-left border-zinc-700"></div>
               </Link>
             </nav>
           </div>
 
-          <div className="p-6 border-t border-zinc-900 bg-zinc-950">
-            <div className="flex justify-between items-center mb-4">
-              <div className="text-[9px] text-zinc-500 uppercase tracking-widest leading-tight">
-                Hannah&apos;s Legacy Home<br />
-                Secure Portal Access
+          <div className="p-8 border-t-2 border-zinc-900 bg-black relative z-30">
+            <div className="flex justify-between items-end mb-6">
+              <div className="text-[10px] text-zinc-500 uppercase tracking-widest leading-relaxed font-bold">
+                <span className="text-[var(--jap-red)]">HANNAH&apos;S LEGACY HOME</span><br />
+                SECURE PORTAL ACCESS<br />
+                UNIT: MOBILE_CMD
               </div>
-              <div className="text-right">
-                <div className="text-[8px] text-zinc-700 font-mono">ENCRYPTION: 256-BIT</div>
-                <div className="text-[8px] text-zinc-700 font-mono">SIGNAL: STABLE</div>
+              <div className="text-right space-y-1">
+                <div className="flex items-center justify-end gap-1">
+                  <div className="w-1.5 h-1.5 bg-green-500 animate-pulse"></div>
+                  <span className="text-[9px] text-zinc-400 font-mono">ENCRYPTION: 256-BIT</span>
+                </div>
+                <div className="flex items-center justify-end gap-1">
+                  <div className="w-1.5 h-1.5 bg-green-500 animate-pulse delay-75"></div>
+                  <span className="text-[9px] text-zinc-400 font-mono">SIGNAL: STABLE</span>
+                </div>
               </div>
             </div>
-            <div className="py-2 border-y border-zinc-900 text-center">
-              <p className="text-[10px] text-[var(--jap-red)] font-bold tracking-[0.2em] animate-pulse">
+            <div className="py-3 border-y border-zinc-900 text-center bg-zinc-900/50">
+              <p className="text-[11px] text-[var(--jap-red)] font-black tracking-[0.3em] animate-pulse">
                 HAVE A WONDERFUL DAY! // 良い一日を
               </p>
             </div>
