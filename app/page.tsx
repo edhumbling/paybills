@@ -29,46 +29,87 @@ export default function Home() {
       )}
 
       {/* Sharp Sidebar Menu */}
-      <div className={`fixed top-0 right-0 h-full w-[350px] bg-[var(--jap-black)] border-l border-[var(--jap-red)] z-[70] transform transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-        <div className="flex flex-col h-full font-bold uppercase tracking-widest relative">
+      <div className={`fixed top-0 right-0 h-full w-full md:w-[350px] bg-zinc-950/95 backdrop-blur-xl border-l border-[var(--jap-red)] z-[70] transform transition-transform duration-500 cubic-bezier(0.16, 1, 0.3, 1) ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div className="flex flex-col h-full relative overflow-hidden">
+          
+          {/* Decorative background elements */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[var(--jap-red)]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+          <div className="absolute bottom-0 left-0 w-64 h-64 bg-[var(--jap-blue)]/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
+
+          {/* Close Button */}
           <button
             onClick={() => setMenuOpen(false)}
-            className="absolute top-6 right-6 text-gray-500 hover:text-[var(--jap-red)] transition-colors p-2"
+            className="absolute top-6 right-6 z-50 w-10 h-10 flex items-center justify-center rounded-full border border-white/10 text-gray-400 hover:text-white hover:border-white hover:bg-white/5 transition-all duration-300 group"
           >
-            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            <svg className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
           </button>
 
-          <div className="p-12 mt-12 space-y-8">
-            <div className="text-[var(--jap-red)] text-xs mb-8 font-mono">SYSTEM NAVIGATION // メニュー</div>
+          <div className="flex-1 px-8 py-20 flex flex-col justify-center max-w-sm mx-auto w-full">
+            <div className="text-[var(--jap-red)] text-[10px] tracking-[0.3em] font-mono mb-12 border-b border-white/10 pb-4">
+              SYSTEM NAVIGATION // メニュー
+            </div>
 
-            <button
-              onClick={() => handleMenuPayment('electricity')}
-              className="w-full text-left group flex items-center justify-between border-b border-gray-800 pb-4 hover:border-[var(--jap-yellow)] transition-colors"
-            >
-              <span className="text-2xl group-hover:text-[var(--jap-yellow)] transition-colors">Electricity</span>
-              <span className="text-xs text-gray-600 group-hover:text-[var(--jap-yellow)] writing-vertical h-8">電気</span>
-            </button>
+            <nav className="space-y-6">
+              {/* Electricity */}
+              <button
+                onClick={() => handleMenuPayment('electricity')}
+                className="w-full group flex items-center justify-between p-4 rounded-xl border border-white/5 hover:border-[var(--jap-yellow)]/50 bg-white/5 hover:bg-[var(--jap-yellow)]/10 transition-all duration-300"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-full bg-black/50 flex items-center justify-center text-[var(--jap-yellow)] group-hover:scale-110 transition-transform">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                  </div>
+                  <div className="text-left">
+                    <span className="block text-lg font-bold text-white group-hover:text-[var(--jap-yellow)] transition-colors tracking-wide">ELECTRICITY</span>
+                    <span className="text-[10px] text-gray-500 font-mono group-hover:text-[var(--jap-yellow)]/70">Bill Payment</span>
+                  </div>
+                </div>
+                <span className="text-xs font-bold text-gray-600 group-hover:text-[var(--jap-yellow)] transition-colors">電気</span>
+              </button>
 
-            <button
-              onClick={() => handleMenuPayment('water')}
-              className="w-full text-left group flex items-center justify-between border-b border-gray-800 pb-4 hover:border-[var(--jap-blue)] transition-colors"
-            >
-              <span className="text-2xl group-hover:text-[var(--jap-blue)] transition-colors">Water</span>
-              <span className="text-xs text-gray-600 group-hover:text-[var(--jap-blue)] writing-vertical h-8">水道</span>
-            </button>
+              {/* Water */}
+              <button
+                onClick={() => handleMenuPayment('water')}
+                className="w-full group flex items-center justify-between p-4 rounded-xl border border-white/5 hover:border-[var(--jap-blue)]/50 bg-white/5 hover:bg-[var(--jap-blue)]/10 transition-all duration-300"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-full bg-black/50 flex items-center justify-center text-[var(--jap-blue)] group-hover:scale-110 transition-transform">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2.5L12 19l6.5-14.5L20 6z"></path><path d="M12 3v13"></path><path d="M9 19l3-3 3 3"></path>
+                    {/* Replaced complicated path with a simple drop or similar. Let's stick to a drop shape manually for safety or simple waves */}
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                    </svg>
+                  </div>
+                  <div className="text-left">
+                    <span className="block text-lg font-bold text-white group-hover:text-[var(--jap-blue)] transition-colors tracking-wide">WATER</span>
+                    <span className="text-[10px] text-gray-500 font-mono group-hover:text-[var(--jap-blue)]/70">Utility Service</span>
+                  </div>
+                </div>
+                <span className="text-xs font-bold text-gray-600 group-hover:text-[var(--jap-blue)] transition-colors">水道</span>
+              </button>
 
-            <Link
-              href="/terms"
-              onClick={() => setMenuOpen(false)}
-              className="w-full text-left group flex items-center justify-between border-b border-gray-800 pb-4 hover:border-white transition-colors"
-            >
-              <span className="text-xl text-gray-400 group-hover:text-white transition-colors">Terms & Conditions</span>
-              <span className="text-xs text-gray-600 group-hover:text-white writing-vertical h-8">規約</span>
-            </Link>
+              {/* Terms */}
+              <Link
+                href="/terms"
+                onClick={() => setMenuOpen(false)}
+                className="w-full group flex items-center justify-between p-4 rounded-xl border border-white/5 hover:border-white/30 bg-white/5 hover:bg-white/10 transition-all duration-300"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-full bg-black/50 flex items-center justify-center text-gray-400 group-hover:text-white group-hover:scale-110 transition-transform">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                  </div>
+                  <div className="text-left">
+                    <span className="block text-lg font-bold text-gray-300 group-hover:text-white transition-colors tracking-wide">TERMS</span>
+                    <span className="text-[10px] text-gray-500 font-mono group-hover:text-gray-300">Conditions</span>
+                  </div>
+                </div>
+                <span className="text-xs font-bold text-gray-600 group-hover:text-white transition-colors">規約</span>
+              </Link>
+            </nav>
           </div>
 
-          <div className="mt-auto p-12 bg-gray-900/20">
-            <p className="text-[10px] text-gray-500 font-mono">HANNAH&apos;S LEGACY HOME<br />SECURE PORTAL v2.0</p>
+          <div className="p-8 bg-black/20 backdrop-blur-sm border-t border-white/5 text-center">
+            <p className="text-[10px] text-gray-400 font-mono mb-2">HANNAH&apos;S LEGACY HOME</p>
+            <p className="text-[10px] text-[var(--jap-red)] font-bold">Have a wonderful day! // 良い一日を</p>
           </div>
         </div>
       </div>
