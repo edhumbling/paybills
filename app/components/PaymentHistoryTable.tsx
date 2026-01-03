@@ -42,34 +42,39 @@ const INITIAL_DATA: MemberPayment[] = [
 
 export default function PaymentHistoryTable() {
     const [selectedYear, setSelectedYear] = useState(2026);
-    const [filterType, setFilterType] = useState<'all' | BillType>('all');
+
 
     const getPaymentDisplay = (memberIndex: number, monthIndex: number) => {
         const member = INITIAL_DATA[memberIndex];
-        if (!member.payments[selectedYear] || !member.payments[selectedYear][monthIndex]) {
-            return null;
-        }
+        // Ensure structure exists
+        const payments = member.payments[selectedYear]?.[monthIndex] || [];
 
-        const payments = member.payments[selectedYear][monthIndex];
-        const filtered = filterType === 'all'
-            ? payments
-            : payments.filter(p => p.type === filterType);
-
-        if (filtered.length === 0) return null;
+        const electricity = payments.find(p => p.type === 'electricity');
+        const water = payments.find(p => p.type === 'water');
 
         return (
-            <div className="flex flex-col gap-1">
-                {filtered.map((p, i) => (
-                    <span
-                        key={i}
-                        className={`text-[10px] font-bold px-1 py-0.5 border ${p.type === 'electricity'
-                            ? 'text-[var(--jap-yellow)] border-[var(--jap-yellow)] bg-[var(--jap-yellow)]/10'
-                            : 'text-[var(--jap-blue)] border-[var(--jap-blue)] bg-[var(--jap-blue)]/10'
-                            }`}
-                    >
-                        {p.amount}
-                    </span>
-                ))}
+            <div className="grid grid-cols-2 gap-px bg-zinc-800/50 w-full h-full min-w-[60px]">
+                {/* Electricity Slot */}
+                <div className={`flex items-center justify-center p-1 ${electricity ? 'bg-[var(--jap-yellow)]/10' : ''}`}>
+                    {electricity ? (
+                        <span className="text-[9px] font-bold text-[var(--jap-yellow)]">
+                            {electricity.amount}
+                        </span>
+                    ) : (
+                        <span className="text-[8px] text-zinc-800/50">.</span>
+                    )}
+                </div>
+
+                {/* Water Slot */}
+                <div className={`flex items-center justify-center p-1 ${water ? 'bg-[var(--jap-blue)]/10' : ''}`}>
+                    {water ? (
+                        <span className="text-[9px] font-bold text-[var(--jap-blue)]">
+                            {water.amount}
+                        </span>
+                    ) : (
+                        <span className="text-[8px] text-zinc-800/50">.</span>
+                    )}
+                </div>
             </div>
         );
     };
@@ -83,35 +88,34 @@ export default function PaymentHistoryTable() {
                         HISTORY LOG <span className="text-[var(--jap-red)]">{'//'}</span> {selectedYear}
                     </h2>
 
-                    <div className="flex flex-wrap gap-2">
-                        {YEARS.map((year) => (
-                            <button
-                                key={year}
-                                onClick={() => setSelectedYear(year)}
-                                className={`px-4 py-2 font-bold text-xs tracking-widest clip-sharp transition-all duration-300 ${selectedYear === year
-                                    ? 'bg-[var(--jap-red)] text-white shadow-[0_0_10px_var(--jap-red)]'
-                                    : 'bg-zinc-900 text-zinc-500 hover:bg-zinc-800 hover:text-white border border-zinc-800'
-                                    }`}
-                            >
-                                {year}
-                            </button>
-                        ))}
+                    {/* Year Selector - Scrollable for Mobile Compactness */}
+                    <div className="w-full overflow-x-auto pb-2 -mb-2">
+                        <div className="flex gap-2 min-w-max">
+                            {YEARS.map((year) => (
+                                <button
+                                    key={year}
+                                    onClick={() => setSelectedYear(year)}
+                                    className={`px-3 py-1.5 md:px-4 md:py-2 font-bold text-[10px] md:text-xs tracking-widest clip-sharp transition-all duration-300 whitespace-nowrap ${selectedYear === year
+                                        ? 'bg-[var(--jap-red)] text-white shadow-[0_0_10px_var(--jap-red)]'
+                                        : 'bg-zinc-900 text-zinc-500 hover:bg-zinc-800 hover:text-white border border-zinc-800'
+                                        }`}
+                                >
+                                    {year}
+                                </button>
+                            ))}
+                        </div>
                     </div>
                 </div>
 
-                <div className="flex gap-2">
-                    {(['all', 'electricity', 'water'] as const).map((type) => (
-                        <button
-                            key={type}
-                            onClick={() => setFilterType(type)}
-                            className={`px-3 py-1 font-mono text-[10px] uppercase border transition-all ${filterType === type
-                                ? 'border-white text-white bg-white/10'
-                                : 'border-zinc-800 text-zinc-600 hover:border-zinc-600'
-                                }`}
-                        >
-                            {type}
-                        </button>
-                    ))}
+                <div className="flex items-center gap-4 text-[10px] font-mono font-bold">
+                    <div className="flex items-center gap-2">
+                        <div className="w-3 h-3 bg-[var(--jap-yellow)]/10 border border-[var(--jap-yellow)]"></div>
+                        <span className="text-[var(--jap-yellow)]">ELECTRICITY</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <div className="w-3 h-3 bg-[var(--jap-blue)]/10 border border-[var(--jap-blue)]"></div>
+                        <span className="text-[var(--jap-blue)]">WATER</span>
+                    </div>
                 </div>
             </div>
 

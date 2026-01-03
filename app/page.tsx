@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import PaymentModal from './components/PaymentModal';
 import CurrentYear from './components/CurrentYear';
+import PaymentHistoryTable from './components/PaymentHistoryTable';
 
 const LOGO_URL = "https://ik.imagekit.io/humbling/6a8072f2-bf06-4bf0-b2cd-ff2c971a6881.png";
 
@@ -120,7 +121,7 @@ export default function Home() {
 
               {/* History - Militant Card */}
               <Link
-                href="/history"
+                href="/paymenthistory"
                 onClick={() => setMenuOpen(false)}
                 className="w-full group relative p-6 bg-zinc-900 border-2 border-zinc-800 hover:border-[var(--jap-red)] hover:bg-zinc-800 transition-all duration-100 text-left block overflow-hidden clip-sharp"
               >
@@ -339,6 +340,13 @@ export default function Home() {
             </div>
 
           </div>
+        </div>
+      </section>
+
+      {/* Payment History Table Section */}
+      <section className="py-12 bg-black border-t border-zinc-900">
+        <div className="container-main px-6">
+          <PaymentHistoryTable />
         </div>
       </section>
 
