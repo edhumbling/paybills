@@ -55,7 +55,7 @@ export default function Home() {
           {/* Close Button - Tactical Style */}
           <button
             onClick={() => setMenuOpen(false)}
-            className="absolute top-6 right-6 z-50 w-12 h-12 flex items-center justify-center bg-zinc-900 border-2 border-[var(--jap-red)] text-white hover:bg-[var(--jap-red)] hover:text-black transition-all duration-100 group clip-sharp shadow-[0_0_10px_rgba(215,0,15,0.3)]"
+            className="absolute top-6 right-6 z-50 w-12 h-12 flex items-center justify-center bg-zinc-900 border-2 border-[var(--jap-red)] text-white hover:bg-[var(--jap-red)] hover:text-white transition-all duration-100 group clip-sharp shadow-[0_0_10px_rgba(215,0,15,0.3)]"
           >
             <div className="relative w-6 h-6">
               <span className="absolute top-1/2 left-0 w-full h-0.5 bg-currentColor rotate-45 group-hover:rotate-0 transition-transform"></span>
