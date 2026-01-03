@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import PaymentModal from './components/PaymentModal';
@@ -17,6 +17,17 @@ export default function Home() {
     setMenuOpen(false);
     setPaymentType(type);
   };
+
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [menuOpen]);
 
   return (
     <div className="min-h-screen font-sans bg-japanese-grid text-white overflow-x-hidden selection:bg-[var(--jap-red)] selection:text-white relative">
