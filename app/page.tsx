@@ -66,7 +66,7 @@ export default function Home() {
             </div>
           </button>
 
-          <div className="flex-1 px-8 py-24 flex flex-col justify-start relative z-30">
+          <div className="flex-1 px-8 pt-24 pb-8 flex flex-col justify-start relative z-30 overflow-y-auto no-scrollbar">
             <div className="mb-12 border-l-2 border-zinc-800 pl-4 py-2">
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-3 h-3 bg-[var(--jap-red)] shadow-[0_0_8px_var(--jap-red)] animate-pulse"></div>
@@ -366,6 +366,11 @@ export default function Home() {
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[var(--jap-red)] via-[var(--jap-yellow)] to-[var(--jap-blue)] opacity-50"></div>
         <div className="container-main">
           <h3 className="text-[var(--jap-white)] font-bold tracking-[0.3em] text-xs mb-4">HANNAH&apos;S LEGACY HOME</h3>
+          <div className="mb-6">
+            <Link href="/terms" className="text-[10px] text-zinc-500 hover:text-[var(--jap-red)] tracking-widest uppercase transition-colors">
+              [ READ TERMS_AND_CONDITIONS ]
+            </Link>
+          </div>
           <p className="text-gray-600 text-[10px] font-mono">
             © <CurrentYear /> COPYRIGHT // SECURE SYSTEM<br />
             DESIGNED IN TOKYO STYLE

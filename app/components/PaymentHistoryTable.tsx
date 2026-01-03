@@ -85,7 +85,7 @@ export default function PaymentHistoryTable() {
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-8 border-b border-white/10 pb-6">
                 <div>
                     <h2 className="text-2xl font-black text-white italic tracking-tighter mb-4">
-                        HISTORY LOG <span className="text-[var(--jap-red)]">{'//'}</span> {selectedYear}
+                        PAYMENTS HISTORY <span className="text-[var(--jap-red)]">{'//'}</span> {selectedYear}
                     </h2>
 
                     {/* Year Selector - Scrollable for Mobile Compactness */}
