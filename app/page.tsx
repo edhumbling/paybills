@@ -118,6 +118,30 @@ export default function Home() {
                 </div>
               </button>
 
+              {/* History - Militant Card */}
+              <Link
+                href="/history"
+                onClick={() => setMenuOpen(false)}
+                className="w-full group relative p-6 bg-zinc-900 border-2 border-zinc-800 hover:border-[var(--jap-red)] hover:bg-zinc-800 transition-all duration-100 text-left block overflow-hidden clip-sharp"
+              >
+                <div className="absolute top-0 right-0 w-16 h-1 bg-[var(--jap-red)] group-hover:w-full transition-all duration-300 ease-out"></div>
+                <div className="absolute bottom-0 left-0 w-8 h-1 bg-[var(--jap-red)] group-hover:w-full transition-all duration-500 ease-out delay-75"></div>
+
+                <div className="flex items-center justify-between relative z-10">
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="px-1.5 py-0.5 bg-[var(--jap-red)] text-white text-[9px] font-black tracking-widest">03</span>
+                      <span className="text-[10px] text-zinc-500 group-hover:text-white transition-colors tracking-widest uppercase font-bold">ARCHIVE</span>
+                    </div>
+                    <span className="block text-2xl font-black text-zinc-400 group-hover:text-white tracking-tighter transition-colors italic">HISTORY</span>
+                  </div>
+                  <div className="text-right">
+                    <span className="block text-xl font-bold text-zinc-700 group-hover:text-white transition-colors mb-1">履歴</span>
+                    <span className="inline-block px-1 py-0.5 bg-zinc-800 text-[9px] text-[var(--jap-red)] font-bold border border-[var(--jap-red)]">VIEW</span>
+                  </div>
+                </div>
+              </Link>
+
               {/* Terms - Militant Card */}
               <Link
                 href="/terms"
@@ -130,7 +154,7 @@ export default function Home() {
                 <div className="flex items-center justify-between relative z-10">
                   <div>
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="px-1.5 py-0.5 bg-white text-black text-[9px] font-black tracking-widest">03</span>
+                      <span className="px-1.5 py-0.5 bg-white text-black text-[9px] font-black tracking-widest">04</span>
                       <span className="text-[10px] text-zinc-500 group-hover:text-white transition-colors tracking-widest uppercase font-bold">LEGAL_DOC</span>
                     </div>
                     <span className="block text-2xl font-black text-zinc-400 group-hover:text-white tracking-tighter transition-colors italic">TERMS</span>
