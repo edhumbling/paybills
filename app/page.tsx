@@ -198,11 +198,7 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="py-3 border-y border-zinc-900 text-center bg-zinc-900/50">
-              <p className="text-[11px] text-[var(--jap-red)] font-black tracking-[0.3em] animate-pulse">
-                HAVE A WONDERFUL DAY! // 良い一日を
-              </p>
-            </div>
+
           </div>
         </div>
       </div>
