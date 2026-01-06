@@ -18,7 +18,7 @@ interface MemberPayment {
     };
 }
 
-const MEMBERS = ['Lucky Boy', 'Patience', 'Theresah', 'Emma'];
+const MEMBERS = ['Lucky Boy', 'Patience', 'Theresah', 'Emma', 'Mama Hanna'];
 const YEARS = [2026, 2027, 2028, 2029, 2030];
 const MONTHS = [
     'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN',
@@ -38,6 +38,14 @@ const INITIAL_DATA: MemberPayment[] = [
     { name: 'Patience', payments: {} },
     { name: 'Theresah', payments: {} },
     { name: 'Emma', payments: {} },
+    {
+        name: 'Mama Hanna',
+        payments: {
+            2026: {
+                0: [{ amount: 110, type: 'electricity' }] // Jan 2026
+            }
+        }
+    },
 ];
 
 export default function PaymentHistoryTable() {
